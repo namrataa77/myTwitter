@@ -1,0 +1,31 @@
+extends layouts/login-layout.pug
+
+block content 
+    .loginContainer
+        h2 Register
+        form#registerForm(method="post", onsubmit=" event.preventDefault(); validateForm();") 
+
+            p.errorMessage #(errorMessage)
+
+            input(type="text", name="firstName", placeholder = "First name",style = "font-size: medium; padding: 5px; padding-left: 10px;", value=firstName required = "")
+            input(type="text", name="lastName", placeholder = "Last name",style = "font-size: medium; padding: 5px; padding-left: 10px;",value=lastName required = "")
+            input(type="text", name="username", placeholder = "Username",style = "font-size: medium; padding: 5px; padding-left: 10px;",value=username required = "")
+            input(type="email", name="email", placeholder = "Email",style = "font-size: medium; padding: 5px; padding-left: 10px;",value=email required = "")
+            input#password(type="password", name="password", placeholder = "Password",style = "font-size: medium; padding: 5px; padding-left: 10px;", required = "")
+            input#passwordConfirm(type="password", name="PasswordConfirm", placeholder = "Confirm Password",style = "font-size: medium; padding: 5px; padding-left: 10px;", required = "")
+            input(type="submit", value="Register",style = "font-size: medium; padding: 5px; padding-left: 10px;")
+
+                
+        a(href="/login" style = "font-size: medium;") Already have an account? Login here. 
+
+    script. 
+        var passwordField = document.getElementById("password")
+        var passwordConfirmField = document.getElementById("passwordConfirm")
+        var form = document.getElementById("registerForm")
+
+        function validateForm(){
+            if(passwordField.value != passwordConfirmField.value) {
+                alert("Passwords do not match. Please try again.")
+            }
+            else form.submit();
+        }

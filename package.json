@@ -1,0 +1,26 @@
+{
+  "name": "mytwitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node myApp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namrataa77/myTwitter.git"
+  },
+  "author": "Namrata Thakur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namrataa77/myTwitter/issues"
+  },
+  "homepage": "https://github.com/namrataa77/myTwitter#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "colors": "^1.4.0",
+    "express": "^4.18.1",
+    "pug": "^3.0.2"
+  }
+}
