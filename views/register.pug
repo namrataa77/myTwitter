@@ -5,7 +5,7 @@ block content
         h2 Register
         form#registerForm(method="post", onsubmit=" event.preventDefault(); validateForm();") 
 
-            p.errorMessage #(errorMessage)
+            p.errorMessage #{errorMessage}
 
             input(type="text", name="firstName", placeholder = "First name",style = "font-size: medium; padding: 5px; padding-left: 10px;", value=firstName required = "")
             input(type="text", name="lastName", placeholder = "Last name",style = "font-size: medium; padding: 5px; padding-left: 10px;",value=lastName required = "")
