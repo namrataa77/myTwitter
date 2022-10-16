@@ -4,7 +4,10 @@ block content
     .loginContainer
         h2 Login
             form(method="post") 
-                input(type="text", name="logUsername", placeholder = "Username or email", style = "font-size: medium; padding: 5px; padding-left: 10px;", required = "")
+
+                h6.errorMessage #{errorMessage}
+
+                input(type="text", name="logUsername", placeholder = "Username or email", value = logUsername ,style = "font-size: medium; padding: 5px; padding-left: 10px;", required = "")
                 input(type="Password", name="logPassword", placeholder = "Password", style = "font-size: medium; padding: 5px; padding-left: 10px;", required = "")
                 input(type="submit", value="Login", style = "font-size: medium; padding: 5px 5px;")
                 a(href="/register" style = "font-size: medium;") Need an account? Register now. 

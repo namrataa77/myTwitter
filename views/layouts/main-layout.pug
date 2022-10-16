@@ -6,10 +6,34 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title #{pageTitle}
         link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css')
+        link(rel="stylesheet", href="/css/main.css")
     body 
-        block content
+
+        .wrapper
+            .row
+                nav.col-2
+                    a.blue(href="")
+                        i.fas.fa-dove
+                    a(href="/") 
+                        i.fa-sharp.fa-solid.fa-house
+                    a(href="/")
+                        i.fa-solid.fa-magnifying-glass
+                    a(href="/notifications")
+                        i.fas.fa-bell
+                    a(href="/messages")
+                        i.fas.fa-envelope
+                    a(href="/profile")
+                        i.fas.fa-user
+                    a(href="/logout")
+                        i.fas.fa-sign-out-alt
+                .mainSectionContainer.col-10.col-md-8.col-lg-6
+                    block content
+
+                .d-none.d-md-block.col-2.col-lg-4
+                    span third column
 
 
+        script(src='https://kit.fontawesome.com/49daf41baf.js' crossorigin='anonymous')
         script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js', integrity='sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3', crossorigin='anonymous')
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js', integrity='sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz', crossorigin='anonymous')
         script(src='https://code.jquery.com/jquery-3.6.1.min.js', integrity='sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=', crossorigin='anonymous')

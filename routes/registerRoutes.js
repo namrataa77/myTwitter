@@ -46,7 +46,8 @@ router.post("/", async (req, res, next) => {
 
             User.create(data)
             .then((user) => {
-                console.log(user);
+                req.session.user = user;
+                return res.redirect("/");
             })
         }
         else {
