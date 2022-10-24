@@ -29,7 +29,7 @@ router.post("/", async (req, res, next) => {
         })
         .catch((error) => {
             console.log(error);
-            playload.errorMessage = "Something went wrong.";
+            payload.errorMessage = "Something went wrong.";
             res.status(200).render("login", payload);
         });
 

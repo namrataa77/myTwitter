@@ -1,3 +1,5 @@
+include ../mixins/mixins
+
 doctype html
 html(lang="en")
     head
@@ -27,6 +29,8 @@ html(lang="en")
                     a(href="/logout")
                         i.fas.fa-sign-out-alt
                 .mainSectionContainer.col-10.col-md-8.col-lg-6
+                    .titleContainer
+                        h1 #{pageTitle}
                     block content
 
                 .d-none.d-md-block.col-2.col-lg-4
