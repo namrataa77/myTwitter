@@ -32,6 +32,10 @@ $("#submitPostButton").click((event) => {
     })
 })
 
+$(document).on("click", ".likeButton", () => {
+    alert("button clicked");
+})
+
 function createPostHtml(postData){
     var postedBy = postData.postedBy;
 
@@ -40,7 +44,7 @@ function createPostHtml(postData){
     }
 
     var displayName = postedBy.firstName+" "+ postedBy.lastName;
-    var timestamp = timeDifference(new Date(), new Date(postData, createdAt));
+    var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
     return `<div class='post'>
                 <div class = 'mainContentContainer'>
@@ -70,7 +74,7 @@ function createPostHtml(postData){
                             </div>
 
                             <div class = 'postButtonContainer' style="flex: 1; ">
-                                <button>
+                                <button class = 'likeButton'>
                                     <i class="fa-regular fa-heart"></i>
                                 </button>
                             </div>
