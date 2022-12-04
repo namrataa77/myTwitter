@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     content: {
         type: String,
-        trim: true
+        trim: true,
     },
     postedBy: {
         type: Schema.Types.ObjectId,
@@ -20,10 +20,10 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    retweetData: [{
+    retweetData: {
         type: Schema.Types.ObjectId,
         ref: 'Post'
-    }]  
+    }
 }, { timestamps: true});
 
 var Post = mongoose.model('Post', PostSchema);
