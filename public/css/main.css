@@ -182,6 +182,7 @@ button span {
     border-radius: 50%;
 }
 
+
 .postButtonContainer.red button.active {
     color: var(--red);
 }
@@ -202,4 +203,9 @@ button span {
     font-size: 13px;
     margin-bottom: var(--spacing);
     color: var(--greyText);
+}
+
+.modal .postFormContainer {
+    border: none;
+    padding: 0;
 }

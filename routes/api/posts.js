@@ -24,6 +24,22 @@ router.get("/", (req, res, next) => {
     })
 })
 
+router.get("/:id", (req, res, next) => {
+    return res.status(200).send("This is awesome!")
+    Post.find()
+    .populate("postedBy")
+    .populate("retweetData")
+    .sort({"createdAt": -1})
+    .then(async results => {
+        results = await User.populate( results, { path : "retweetData.postedBy"});
+        res.status(200).send(results);
+    })
+    .catch(error => {
+        console.log("error");
+        res.sendStatus(400);
+    })
+})
+
 router.post("/", async (req, res, next) => {
     
     if(!req.body.content){

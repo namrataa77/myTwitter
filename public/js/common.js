@@ -1,8 +1,10 @@
-$("#postTextarea").keyup(event =>{
+$("#postTextarea, #replyTextarea").keyup(event =>{
     var textbox = $(event.target);
     var value = textbox.val().trim();
     
-    var submitButton = $("#submitPostButton");
+    var isModal = textbox.parents(".modal").length == 1;
+    
+    var submitButton = isModal ? $("#submitReplyButton") : $("#submitPostButton");
 
     if(submitButton.length == 0) return alert("No submit button found!");
 
@@ -29,6 +31,14 @@ $("#submitPostButton").click((event) => {
         $(".postContainer").prepend(html);
         textbox.val("");
         button.prop("disabled", true);
+    })
+})
+
+$("#replyModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostIdFromElement(button);
+    $.get("/api/posts/" + postId, results => {
+        console.log(results);
     })
 })
 
@@ -77,6 +87,7 @@ $(document).on("click", ".retweetButton", (event) => {
     })
 })
 
+
 function getPostIdFromElement(element) {
     var isRoot = element.hasClass("post"); 
     var rootElement = isRoot ? element : element.closest(".post");
@@ -93,7 +104,7 @@ function createPostHtml(postData){
     var isRetweet = postData.retweetData !== undefined;
     var retweetedBy = isRetweet ? postData.postedBy.username : null;
     postData = isRetweet ? postData.retweetData : postData;
-    console.log(isRetweet);
+    
 
     var postedBy = postData.postedBy;
 
@@ -134,7 +145,7 @@ function createPostHtml(postData){
                         </div>
                         <div class='Postfooter' style="display: flex; align-items: center;">
                             <div class = 'postButtonContainer' style="flex: 1;">
-                                <button data-toggle="modal" data-target="#replyModal">
+                                <button data-bs-toggle="modal" data-bs-target="#replyModal">
                                     <i class="fa-regular fa-comment"></i>
                                 </button>
                             </div>
