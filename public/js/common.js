@@ -87,6 +87,14 @@ function getPostIdFromElement(element) {
 }
 
 function createPostHtml(postData){
+
+    if(postData == null) return alert("post object is null");
+
+    var isRetweet = postData.retweetData !== undefined;
+    var retweetedBy = isRetweet ? postData.postedBy.username : null;
+    postData = isRetweet ? postData.retweetData : postData;
+    console.log(isRetweet);
+
     var postedBy = postData.postedBy;
 
     if(postedBy._id === undefined){
@@ -98,7 +106,19 @@ function createPostHtml(postData){
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
     var retweetButtonActiveClass = postData.retweetUsers.includes(userLoggedIn._id) ? "active" : "";
 
+    var retweetText = '';
+    if(isRetweet){
+        retweetText = `<span>
+        <i class="fa-solid fa-retweet"></i>
+        Retweeted By
+        <a href = '/profile/${retweetedBy}'>@${retweetedBy}</a>
+        </span>`
+    }
+
     return `<div class='post' data-id = '${postData._id}'>
+                <div class = 'postActionContainer'>
+                    ${retweetText}
+                </div>
                 <div class = 'mainContentContainer'>
                     <div class = 'userImageContainer'>
                         <img src='${postedBy.profilePic}'>
@@ -114,7 +134,7 @@ function createPostHtml(postData){
                         </div>
                         <div class='Postfooter' style="display: flex; align-items: center;">
                             <div class = 'postButtonContainer' style="flex: 1;">
-                                <button>
+                                <button data-toggle="modal" data-target="#replyModal">
                                     <i class="fa-regular fa-comment"></i>
                                 </button>
                             </div>
