@@ -15,15 +15,20 @@ $("#postTextarea, #replyTextarea").keyup(event =>{
     submitButton.prop("disabled", false);
 })
 
-$("#submitPostButton").click((event) => {
+$("#submitPostButton, #submitReplyButton").click((event) => {
     
     var button = $(event.target);
-    var textbox = $("#postTextarea");
+    var isModal = textbox.parents(".modal").length == 1;
+    var textbox = isModal ? $("#replyTextarea") : $("#postTextarea");
 
     var data = {
         content: textbox.val()
     }
-    console.log(textbox.val());
+    if(isModal) {
+        var id = button.data().id;
+        if(id == null) return alert("button id is null");
+        data.replyTo = id;
+    }
 
     $.post("/api/posts", data, (postData, status, xhr) => {
         
@@ -34,12 +39,18 @@ $("#submitPostButton").click((event) => {
     })
 })
 
+
 $("#replyModal").on("show.bs.modal", (event) => {
     var button = $(event.relatedTarget);
     var postId = getPostIdFromElement(button);
+    $("#submitReplyButton").data("id", postId);
     $.get("/api/posts/" + postId, results => {
-        console.log(results);
+        outputPosts(results, $("#originalPostContainer"));
     })
+})
+
+$("#replyModal").on("hidden.bs.modal", (event) => {
+    $("#originalPostContainer").html("");
 })
 
 $(document).on("click", ".likeButton", (event) => {
@@ -201,5 +212,21 @@ function timeDifference(current, previous) {
 
     else {
         return Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
+
+function outputPosts(results, container){
+    container.html("");
+
+    if(!Array.isArray(results)){
+        results = [results];
+    }
+    results.forEach(result => {
+        var html = createPostHtml(result)
+        container.append(html);
+    });
+
+    if(results.length == 0){
+        container.append("<span class = 'noResults'>Nothing to show.</span>")
     }
 }

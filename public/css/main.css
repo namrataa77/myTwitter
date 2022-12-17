@@ -209,3 +209,7 @@ button span {
     border: none;
     padding: 0;
 }
+.modal .post {
+    padding: 0;
+    padding-bottom: var(--spacing);
+}
