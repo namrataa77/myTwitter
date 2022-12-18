@@ -18,7 +18,7 @@ $("#postTextarea, #replyTextarea").keyup(event =>{
 $("#submitPostButton, #submitReplyButton").click((event) => {
     
     var button = $(event.target);
-    var isModal = textbox.parents(".modal").length == 1;
+    var isModal = button.parents(".modal").length == 1;
     var textbox = isModal ? $("#replyTextarea") : $("#postTextarea");
 
     var data = {
@@ -32,10 +32,16 @@ $("#submitPostButton, #submitReplyButton").click((event) => {
 
     $.post("/api/posts", data, (postData, status, xhr) => {
         
-        var html = createPostHtml(postData);
-        $(".postContainer").prepend(html);
-        textbox.val("");
-        button.prop("disabled", true);
+        if(postData.replyTo) {
+            location.reload();
+        }
+
+        else {
+            var html = createPostHtml(postData);
+            $(".postContainer").prepend(html);
+            textbox.val("");
+            button.prop("disabled", true);
+        }
     })
 })
 
@@ -135,6 +141,15 @@ function createPostHtml(postData){
         Retweeted By
         <a href = '/profile/${retweetedBy}'>@${retweetedBy}</a>
         </span>`
+    }
+
+    var replyFlag = "";
+    if(postData.replyTo){
+                                 
+        if(!postData.replyTo._id){
+            return alert("replyTo is not populated");
+        }
+
     }
 
     return `<div class='post' data-id = '${postData._id}'>
