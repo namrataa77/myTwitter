@@ -7,7 +7,7 @@ mixin createPostForm(userLoggedIn)
             .buttonsContainer
                 button#submitPostButton(disabled="") Post
 
-mixin createReplyModal(userLoggedIn)
+mixin createDeletePostModal(userLoggedIn)
     #replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
@@ -25,3 +25,19 @@ mixin createReplyModal(userLoggedIn)
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button#submitReplyButton.btn.btn-primary(type='button', disabled="") Reply
+mixin createReplyModal(userLoggedIn)
+    #deletePostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='deletePostModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#deletePostModalLabel.modal-title Delete the post?
+                    button.close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p You wont be able to delete this. 
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
+                    button#deletePostButton.btn.btn-primary(type='button', disabled="") Delete
+mixin createPostModals(userLoggedIn)
+    +createReplyModal (userLoggedIn)
+    +createDeletePostModal()
