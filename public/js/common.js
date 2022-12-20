@@ -185,13 +185,13 @@ function timeDifference(current, previous) {
 function createPostHtml(postData, largeFont = false){
     
 
-        if(postData == null) return alert("post object is null");
+        if(postData === null) return alert("post object is null");
     
         var isRetweet = postData.retweetData !== undefined;
         var retweetedBy = isRetweet ? postData.postedBy.username : null;
         postData = isRetweet ? postData.retweetData : postData;
         
-        if(postData.postedBy) var postedby = postData.postedBy;
+        var postedby = postData.postedBy;
     
         if(postedby === undefined){
             return console.log("User object not populated.");
@@ -213,7 +213,7 @@ function createPostHtml(postData, largeFont = false){
         }
         
         var replyFlag = "";
-        if(postData.replyTo && postData.replyTo._id){
+        if(postData.replyTo){
                                      
             if(!postData.replyTo){
                 return alert("replyTo is not populated");
@@ -288,8 +288,9 @@ function outputPosts(results, container){
         results = [results];
     }
     results.forEach(result => {
-        var html = createPostHtml(result)
-        container.append(html);
+        if(result.content) {var html = createPostHtml(result)
+        container.append(html);}
+
     });
 
     if(results.length == 0){
